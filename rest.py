@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from pyDes import *
+from Crypto.Cipher import AES
 import time
 
 app = Flask(__name__)
@@ -7,7 +8,7 @@ app = Flask(__name__)
 enc_types = [
     { 'des_key': "-8B key-", 'des_plaintext': "Sample plaintext for des, one of the least secure modes of encryption"},
     { '3des_key': "-16Byte key 123-", '3des_plaintext': "Sample plaintext for 3des, more secure than des but still meh" },
-    { 'aes_key': "P6fx78($bfq@3sh^", 'aes_plaintext': "Sample plaintext for aes, 256 bit key is solid"}
+    { 'aes_key': "P6fx78($bfq@3sh^", 'aes_plaintext': "Sample plaintext for aes, a 256 bit key is solid"}
 ]
 
 @app.route("/")
@@ -100,18 +101,49 @@ def tripleDESEncryption():
 
     return jsonify(dict(data=[f"Runtime of 3DES encryption with plaintext: '{plaintext_s}', and key '{args['key']}' is {timeTaken} seconds."]))
 
-@app.route("/test/<enc_type>/<key>/<plaintext>")
-def test(enc_type, key, plaintext):
-    if (enc_type == "des"):
-        return "des tes"
+@app.route("/aes", methods=["GET"])
+def aesEncryption():
 
-    if (enc_type == "3des"):
-        return "3des test"
+    # Record the starting time for the function
+    start = time.time()
 
-    if (enc_type == "aes"):
-        return "aes test"
+    # Get query parameters from the request
+    args = request.args
+    print(args)
 
-    return 'Incorrect syntax: choose des, 3des, or aes as a key'
+    # Get plaintext from query parameter, then convert it to bytes
+    plaintext_b = bytes(args['plaintext'], encoding='utf8')
+
+    # Convert aes key here to bytes
+    aes_key_b = bytes(args['key'], encoding='utf8')
+
+    # Generate the aes cipher key
+    cipher = AES.new(aes_key_b, AES.MODE_ECB)
+
+    # Encrypt the plaintext to create the ciphertext
+    ciphertext = cipher.encrypt(plaintext_b)
+    print(ciphertext)
+
+    # Generate the aes decipher key
+    d_cipher = AES.new(aes_key_b, AES.MODE_ECB)
+
+    # Decrypt the ciphertext back into plaintext
+    cipher_to_plain = d_cipher.decrypt(ciphertext)
+    print(cipher_to_plain)
+
+    # Convert the plaintext in bytes back into type string
+    plaintext_s = plaintext_b.decode('utf8')
+    print(plaintext_s)
+
+    # Record the ending time for the function
+    end = time.time()
+
+    # Calculate total time taken
+    timeTaken = end - start
+
+    print(f"Runtime of the program is {timeTaken}")
+
+    return jsonify(dict(data=[f"Runtime of AES encryption with plaintext: '{plaintext_s}', and key '{args['key']}' is {timeTaken} seconds."]))
 
 if __name__ == '__main__':
     app.run(port=3000)

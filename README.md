@@ -10,7 +10,8 @@ Setting up the project:
 - Then, cd into pycrypt-rest/
 - Then, run the command: source bin/activate
 - Then, install Flask library: bin/pip3 install flask
-- Lastly, install pip install pyDes
+- Then, install pyDes: pip install pyDes
+- Lastly, install PyCrypto: pip install pycrypto
 
 Running the project:
 
