@@ -16,4 +16,4 @@ Running the project:
 - Run the command: bin/python3 rest.py
 - The server will be hosted locally on port 3000
 
-When adding new commits, MAKE SURE NOT TO COMMIT bin, lib, or pyvenv.cfg. These files are environment-dependent.
+When adding new commits, make sure NOT to commit bin, lib, or pyvenv.cfg. These files are environment-dependent.
