@@ -9,7 +9,8 @@ Setting up the project:
 - After cloning the repository, run the command: virtualenv pycrypt-rest/
 - Then, cd into pycrypt-rest/
 - Then, run the command: source bin/activate
-- Lastly, install Flask library: bin/pip3 install flask
+- Then, install Flask library: bin/pip3 install flask
+- Lastly, install pip install pyDes
 
 Running the project:
 
