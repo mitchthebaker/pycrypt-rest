@@ -16,5 +16,18 @@ def root():
 def getEncTypes():
     return jsonify(enc_types)
 
+@app.route("/test/<enc_type>/<key>/<plaintext>")
+def test(enc_type, key, plaintext):
+    if (enc_type == "des"):
+        return "des tes"
+
+    if (enc_type == "3des"):
+        return "3des test"
+
+    if (enc_type == "aes"):
+        return "aes test"
+
+    return 'Incorrect syntax: choose des, 3des, or aes as a key'
+
 if __name__ == '__main__':
     app.run(port=3000)
