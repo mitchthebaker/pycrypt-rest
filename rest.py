@@ -63,7 +63,7 @@ def desEncryption():
     return jsonify(dict(data=[f"Runtime of DES encryption with plaintext: '{plaintext_s}', and key '{args['key']}' is {timeTaken} seconds."]))
 
 @app.route("/3des", methods=["GET"])
-# @profile 
+#@profile 
 # ^ uncomment when testing
 def tripleDESEncryption():
 
@@ -80,7 +80,7 @@ def tripleDESEncryption():
     # Convert des key here to bytes
     triple_des_key_b = bytes(args['key'], encoding='utf8')
 
-    # Generate the des key
+    # Generate the 3des key
     key = triple_des(triple_des_key_b, CBC, b"\0\0\0\0\0\0\0\0", pad=None, padmode=PAD_PKCS5)
 
     # Encrypt the plaintext to create the ciphertext
@@ -106,7 +106,7 @@ def tripleDESEncryption():
     return jsonify(dict(data=[f"Runtime of 3DES encryption with plaintext: '{plaintext_s}', and key '{args['key']}' is {timeTaken} seconds."]))
 
 @app.route("/aes", methods=["GET"])
-# @profile 
+#@profile 
 # ^ uncomment when testing
 def aesEncryption():
 
