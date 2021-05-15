@@ -10,8 +10,15 @@ Setting up the project:
 - Then, cd into pycrypt-rest/
 - Then, run the command: source bin/activate
 - Then, install Flask library: bin/pip3 install flask
-- Then, install pyDes: pip install pyDes
-- Lastly, install PyCrypto: pip install pycrypto
+- Then, install pyDes: pip install pyDes (may also have to run bin/pip3 install pyDes for line_profiler)
+- Lastly, install PyCrypto: pip install pycrypto (may also have to run bin/pip3 install pycrypto for line_profiler)
+
+How to get a more complete breakdown of the time taken for each route:
+- Run the command: pip install line_profiler
+- Add @profile above the function or block of code to test
+- Test the code with the command: kernprof -l -v rest.py
+- From a browser/Postman, test an api route of choice. (example: http://localhost:3000/des?plaintext=hello&key=-8B%20key-)
+- After the route finishes, ctrl + c in console and the output from line_profiler library will be displayed
 
 Running the project:
 

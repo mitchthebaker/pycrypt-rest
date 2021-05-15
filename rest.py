@@ -20,6 +20,8 @@ def getEncTypes():
     return jsonify(enc_types)
 
 @app.route("/des", methods=["GET"])
+# Add @profile above a function to test it with line_profiler
+@profile
 def desEncryption():
 
     # Record the starting time for the function
@@ -61,6 +63,8 @@ def desEncryption():
     return jsonify(dict(data=[f"Runtime of DES encryption with plaintext: '{plaintext_s}', and key '{args['key']}' is {timeTaken} seconds."]))
 
 @app.route("/3des", methods=["GET"])
+# @profile 
+# ^ uncomment when testing
 def tripleDESEncryption():
 
      # Record the starting time for the function
@@ -102,6 +106,8 @@ def tripleDESEncryption():
     return jsonify(dict(data=[f"Runtime of 3DES encryption with plaintext: '{plaintext_s}', and key '{args['key']}' is {timeTaken} seconds."]))
 
 @app.route("/aes", methods=["GET"])
+# @profile 
+# ^ uncomment when testing
 def aesEncryption():
 
     # Record the starting time for the function
